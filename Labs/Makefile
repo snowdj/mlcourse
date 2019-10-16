@@ -9,13 +9,14 @@ MACROS = Macros.ltx Theorems.ltx
 
 %.pdf : %.ltx ${MACROS} testtarg
 	cat $< >VarFill.ltx
-	latexmk -pdf -auxdir=./asytmp -jobname=$(basename $@) VarMain.ltx 
+	pdflatex -jobname=$(basename $@) VarMain.ltx
 
 %_sol.pdf : %.ltx ${MACROS} testtarg
 	cat $< >VarFill.ltx
-	latexmk -pdf -auxdir=./asytmp -jobname=$(basename $@) VarMainSol.ltx
+	pdflatex -jobname=$(basename $@) VarMain.ltx
 
-clean : 
+clean :
+	rm VarFill.ltx
 	rm -f ./asytmp/*
 	rm -f *.log
 	rm -f *.fdb_latexmk
@@ -32,9 +33,6 @@ clean :
 	rm -f *.prc
 	rm -f *.js
 	rm -f *.m9
-	rm -f *-*.tex
-	rm -f *-*.pdf
-	rm -f *.asy
 
 fullclean : clean
 	rm -f *.pdf

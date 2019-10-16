@@ -4,21 +4,33 @@
 \begin{frame} 
   \titlepage 
 \end{frame}
+\section{Administrative}
+\begin{frame}
+  \frametitle{Administrative Info}
+  \begin{itemize}
+  \item Make sure you are signed up for the Spring 2019 instance of
+    the class on Piazza.  The link is on the class webpage (link is fixed now).
+  \item All students must submit the first homework on
+    Gradescope using an access code available on Piazza.
+  \item Students on the waiting list expecting to enroll must also
+    submit the first homework on Gradescope using the access code on Piazza.
+  \end{itemize}
+\end{frame}
 \section{Recitation 1}
 \subsection{Initial Question}
 \begin{frame}[fragile]
   \frametitle{Intro Question}
   \begin{block}{Question}
     We are given the data set $(x_1,y_1),\ldots,(x_n,y_n)$ where
-    $x_i\in\RR^d$ and $y_i\in\RR$.  We want to fit a linear function to
+    $x_i\in\RR$ and $y_i\in\RR$.  We want to fit a linear function to
     this data by performing empirical risk minimization.  More
-    precisely, we are using the hypothesis space $\FF=\{f(x)=w^Tx\mid
-    w\in\RR^d\}$ and the loss function $\ell(a,y)=(a-y)^2$.  Given an
-    initial guess $\tilde{w}$ for the empirical risk minimizing
+    precisely, we are using the hypothesis space $\FF=\{h_\theta(x)=\theta_1x+\theta_2\mid
+    \theta\in\RR^2\}$ and the loss function $\ell(a,y)=(a-y)^2$.  Given an
+    initial guess $\tilde{\theta}$ for the empirical risk minimizing
     parameter vector, how could we improve our guess?
   \end{block}
 \begin{center}
-\includegraphics[width=0.7\textwidth,height=0.4\textheight]{1-gradients/Data.pdf}
+\includegraphics[width=0.4\textwidth,height=0.4\textheight]{1-gradients/Data.pdf}
 \end{center}
 \end{frame}
 \begin{frame}
@@ -26,15 +38,94 @@
   \begin{block}{Solution}
     \begin{itemize}
     \item The empirical risk is given by
-      $$\hat{R}_n(f) = \frac{1}{n}\sum_{i=1}^n \ell(f(x_i),y_i) =
-      \frac{1}{n}\sum_{i=1}^n (w^Tx_i-y_i)^2
-      = \frac{1}{n}\|Xw-y\|_2^2,$$
-      where $X\in\RR^{n\times d}$ is the matrix whose $i$th row is
-      given by $x_i$.
-    \item Can improve a non-optimal guess $\tilde{w}$ by taking a
-      small step in the direction of the negative gradient.
+      $$\begin{Array}{rcl}
+      \hspace{-0.5cm}J(\theta) & := & \hat{R}_n(h_\theta) = \frac{1}{n}\sum_{i=1}^n \ell(\theta_1x_i+\theta_2,y_i) =
+      \frac{1}{n}\sum_{i=1}^n (\theta_1x_i+\theta_2-y_i)^2\\
+      & = & \frac{1}{n}\|X\theta-y\|_2^2,
+      \end{Array}$$
+      where $X\in\RR^{n\times 2}$ is the matrix whose $i$th row is
+      given by $(x_i,1)$.
+    \item Can improve a non-optimal guess $\tilde{\theta}$ by taking a
+      small step in the direction of the negative gradient $-\nabla J(\theta)$.
     \end{itemize}
   \end{block}  
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour0.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data0.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour1.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data1.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour2.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data2.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour3.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data3.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour4.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data4.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour5.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data5.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour10.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data10.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour15.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data15.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour20.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data20.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour25.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data25.pdf}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Negative Gradient Steps}
+  \begin{center}
+    \includegraphics[width=0.4\textwidth]{1-gradients/contour50.pdf}
+    \includegraphics[width=0.4\textwidth]{1-gradients/Data50.pdf}
+  \end{center}
 \end{frame}
 \subsection{Single Variable Calculus}
 \begin{frame}
@@ -62,7 +153,7 @@
   \frametitle{Multivariable Differentiation}
   \begin{itemize}
   \item Consider now a function $f:\RR^n\to\RR$ with inputs of the
-    form $x=(x_1,\ldots,x_n)\in\RR^n$.
+    form $x=(x_1,\ldots,x_n)^T\in\RR^n$.
   \item Unlike the 1-dimensional case, we cannot assign a single
     number to the slope at a point since there are many directions we can move in.
   \end{itemize}
@@ -72,6 +163,19 @@
 \begin{center}
 \includegraphics[width=\textwidth,height=0.8\textheight]{1-gradients/Directions.pdf}
 \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Multivariable Differentiation}
+  \begin{enumerate}
+  \item We will look at two (related) methods for understanding
+    multivariable differentiation:
+    \begin{enumerate}
+    \item Directional Derivatives: Derivative computed along a single
+      direction
+    \item Gradient: Gives multidimensional linear approximation and
+      the steepest ascent direction
+    \end{enumerate}
+  \end{enumerate}
 \end{frame}
 \begin{frame}
   \frametitle{Directional Derivative}
@@ -85,7 +189,10 @@
     problem into a 1-dimensional problem.
   \item Similar to 1-d we have
     $$f(x+hu) = f(x) + hf'(x;u) + o(h).$$
-  \item We say that $u$ is a \textit{descent direction} of $f$ at $x$ if $f'(x;u)<0$.
+  \item We say that $u$ is a \textit{descent direction} of $f$ at $x$
+    if $f'(x;u)<0$.
+  \item Taking a small enough step in a descent
+    direction causes the function value decreases.
   \end{itemize}
 \end{frame}
 \begin{frame}[fragile]
@@ -110,7 +217,7 @@
   \end{itemize}
 \end{frame}
 \begin{frame}
-  \frametitle{Differentiability}
+  \frametitle{Differentiability and Gradients}
   \begin{itemize}
   \item We say a function $f:\RR^n\to\RR$ is \textit{differentiable}
     at $x\in\RR^n$ if
@@ -140,13 +247,14 @@
   \end{itemize}
 \end{frame}
 \begin{frame}
-  \frametitle{Tangent Plane}
+  \frametitle{Linear Approximation and Tangent Plane}
   \begin{itemize}
+  \item Gradient gives us a linear approximation of $f$ near the point
+    $x$:
+    $$f(x+v)\approx f(x)+\nabla f(x)^Tv.$$
   \item Analogous to the 1-d case we can express differentiability as
     $$f(x+v) = f(x) + \nabla f(x)^Tv + o(\|v\|_2).$$
-  \item The approximation $f(x+v)\approx f(x)+\nabla f(x)^Tv$ gives a
-    tangent plane at the point $x$.
-  \item The tangent plane of $f$ at $x$ is given by
+  \item The gradient approximation can be seen as a tangent plane given by
     $$P = \{(x+v,f(x)+\nabla f(x)^Tv)\mid v\in\RR^n\}\subseteq
     \RR^{n+1}.$$
   \item Methods like gradient descent approximate a function locally
@@ -156,15 +264,18 @@
 \begin{frame}[fragile]
   \frametitle{Tangent Plane for $f:\RR^2\to\RR$}
 \begin{center}
-\includegraphics[width=\textwidth,height=0.8\textheight]{1-gradients/Tangent.pdf}
+  \includegraphics[width=\textwidth,height=0.8\textheight]{1-gradients/Tangent.pdf}
 \end{center}
 \end{frame}
 \begin{frame}
   \frametitle{Directional Derivatives from Gradients}
   \begin{itemize}
-  \item If $f$ is differentiable we have
+  \item If $f$ is differentiable we obtain a formula for any
+    directional derivative in terms of the gradient
     $$f'(x;u) = \nabla f(x)^Tu.$$
-  \item If $\nabla f(x)\neq 0$ this implies that
+  \item This implies that a direction is a descent direction if and only if
+    it makes an acute angle with the negative gradient.
+  \item If $\nabla f(x)\neq 0$ applying Cauchy-Schwarz gives
     $$\argmax_{\|u\|_2=1} f'(x;u) = \frac{\nabla f(x)}{\|\nabla f(x)\|_2}
     \quad\text{and}\quad
     \argmin_{\|u\|_2=1} f'(x;u) = -\frac{\nabla f(x)}{\|\nabla
@@ -182,7 +293,7 @@
     is a local extremum then we must have $\nabla f(x)=0$.
   \item Points with $\nabla f(x)=0$ are called \textit{critical
     points}.
-  \item Later we will see that for a convex differentiable function,
+  \item Later in the course we will see that for a convex differentiable function,
     $x$ is a critical point if and only if it is a global minimizer.
   \end{itemize}
 \end{frame}
@@ -192,44 +303,60 @@
 \includegraphics[width=\textwidth,height=0.8\textheight]{1-gradients/Saddle.pdf}
 \end{center}
 \end{frame}
+\begin{frame}
+  \frametitle{Recap}
+  \begin{itemize}
+  \item To find a good decision function we will minimize the
+    empirical loss on the training data.
+  \item Having fixed a hypothesis space parameterized by $\theta$,
+    finding a good decision function means finding a good $\theta$.
+  \item Given a current guess for $\theta$, we will use the gradient
+    of the empirical loss (w.r.t.~$\theta$)
+    to get a local linear approximation.
+  \item If the gradient is non-zero, taking a small step in the direction of the negative
+    gradient is guaranteed to decrease the empirical loss.
+  \item This motivates the minimization algorithm called gradient descent.
+  \end{itemize}
+\end{frame}
 \subsection{Computing Gradients}
 \begin{frame}[fragile]
   \frametitle{Computing Gradients}
   \begin{block}{Question}
     For questions 1 and 2, compute the gradient of the given function.
     \begin{enumerate}
-    \item $f:\RR^3\to\RR$ is given by
-      $$f(x_1,x_2,x_3) = \log(1+e^{x_1+2x_2+3x_3}).$$
-    \item $f:\RR^n\to\RR$ is given by
-      $$f(x) = \|Ax-y\|_2^2 = (Ax-y)^T(Ax-y) = x^TA^TAx - 2y^TAx+y^Ty,$$
-      for some $A\in\RR^{m\times n}$ and $y\in\RR^m$.
-    \item Assume $A$ in the previous question has full column rank.
-      What is the critical point of $f$?
+    \item $J:\RR^3\to\RR$ is given by
+      $$J(\theta_1,\theta_2,\theta_3) = \log(1+e^{\theta_1+2\theta_2+3\theta_3}).$$
+    \item $J:\RR^n\to\RR$ is given by
+      $$J(\theta) = \|X\theta-y\|_2^2 = (X\theta-y)^T(X\theta-y) = \theta^TX^TX\theta - 2y^TX\theta+y^Ty,$$
+      for some $X\in\RR^{m\times n}$ and $y\in\RR^m$.
+    \item Assume $X$ in the previous question has full column rank.
+      What is the critical point of $J$?
     \end{enumerate}
   \end{block}
 \end{frame}
 \begin{frame}
-  \frametitle{$f(x_1,x_2,x_3)=\log(1+e^{x_1+2x_2+3x_3})$ Solution 1}
+  \frametitle{$J(\theta_1,\theta_2,\theta_3)=\log(1+e^{\theta_1+2\theta_2+3\theta_3})$ Solution 1}
   We can compute the partial derivatives directly:
   $$\begin{Array}{rcl}
-    \partial_{x_1} f(x_1,x_2,x_3) &=&\frac{e^{x_1+2x_2+3x_3}}{1+e^{x_1+2x_2+3x_3}}\\
-    \partial_{x_2} f(x_1,x_2,x_3) &=&\frac{2e^{x_1+2x_2+3x_3}}{1+e^{x_1+2x_2+3x_3}}\\
-    \partial_{x_3} f(x_1,x_2,x_3) &=&
-    \frac{3e^{x_1+2x_2+3x_3}}{1+e^{x_1+2x_2+3x_3}}
+    \partial_{\theta_1} J(\theta_1,\theta_2,\theta_3) &=&\frac{e^{\theta_1+2\theta_2+3\theta_3}}{1+e^{\theta_1+2\theta_2+3\theta_3}}\\
+    \partial_{\theta_2} J(\theta_1,\theta_2,\theta_3) &=&\frac{2e^{\theta_1+2\theta_2+3\theta_3}}{1+e^{\theta_1+2\theta_2+3\theta_3}}\\
+    \partial_{\theta_3} J(\theta_1,\theta_2,\theta_3) &=&
+    \frac{3e^{\theta_1+2\theta_2+3\theta_3}}{1+e^{\theta_1+2\theta_2+3\theta_3}}
     \end{Array}$$
   and obtain
-  $$\nabla f(x_1,x_2,x_3) =
-  \PMattt{\frac{e^{x_1+2x_2+3x_3}}{1+e^{x_1+2x_2+3x_3}}}
-         {\frac{2e^{x_1+2x_2+3x_3}}{1+e^{x_1+2x_2+3x_3}}}
-         {\frac{3e^{x_1+2x_2+3x_3}}{1+e^{x_1+2x_2+3x_3}}}.$$         
+  $$\nabla J(\theta_1,\theta_2,\theta_3) =
+  \PMattt{\frac{e^{\theta_1+2\theta_2+3\theta_3}}{1+e^{\theta_1+2\theta_2+3\theta_3}}}
+         {\frac{2e^{\theta_1+2\theta_2+3\theta_3}}{1+e^{\theta_1+2\theta_2+3\theta_3}}}
+         {\frac{3e^{\theta_1+2\theta_2+3\theta_3}}{1+e^{\theta_1+2\theta_2+3\theta_3}}}.$$         
 \end{frame}
 \begin{frame}
-  \frametitle{$f(x_1,x_2,x_3)=\log(1+e^{x_1+2x_2+3x_3})$ Solution 2}
+  \frametitle{$J(\theta_1,\theta_2,\theta_3)=\log(1+e^{\theta_1+2\theta_2+3\theta_3})$ Solution 2}
   \begin{itemize}
+  \item Spot the linear algebra!
   \item Let $w=(1,2,3)^T$.
-  \item Write $f(x) = \log(1+e^{w^Tx})$.
-  \item Apply a version of the chain rule:
-    $$\nabla f(x) = \frac{e^{w^Tx}}{1+e^{w^Tx}}w.$$
+  \item Write $J(\theta) = \log(1+e^{w^T\theta})$.
+  \item Apply a version of the chain rule (twice):
+    $$\nabla J(\theta) = \frac{e^{w^T\theta}}{1+e^{w^T\theta}}w.$$
   \end{itemize}
   \begin{theorem}[Chain Rule]
     If $g:\RR\to\RR$ and $h:\RR^n\to\RR$ are differentiable then
@@ -237,33 +364,34 @@
   \end{theorem}
 \end{frame}
 \begin{frame}
-  \frametitle{$f(x) = \|Ax-y\|_2^2$ Solution}
+  \frametitle{$J(\theta) = \|X\theta-y\|_2^2$ Solution}
   \begin{itemize}
   \item We could use techniques similar to the previous problem, but
     instead we show a different method using directional derivatives.
-  \item For arbitrary $t\in\RR$ and $x,v\in\RR^n$ we have
+  \item For arbitrary $t\in\RR$ and $\theta,v\in\RR^n$ we have
     $$\hspace{-.5cm}\begin{array}{rcl}
-    \multicolumn{3}{l}{f(x+tv)}\\
-    & = & (x+tv)^TA^TA(x+tv) - 2y^TA(x+tv)+y^Ty \\
-    & = & x^TA^TAx + t^2v^TA^TAv + 2tx^TA^TAv-2y^TAx-2ty^TAv+y^Ty\\
-    & = & f(x) + t(2x^TA^TA - 2y^TA)v + t^2v^TA^TAv.
+    \multicolumn{3}{l}{J(\theta+tv)}\\
+    & = & (\theta+tv)^TX^TX(\theta+tv) - 2y^TX(\theta+tv)+y^Ty \\
+    & = & \underline{\theta^TX^TX\theta} + t^2v^TX^TXv + 2t\theta^TX^TXv-\underline{2y^TX\theta}-2ty^TXv+\underline{y^Ty}\\
+    & = & \underline{J(\theta)} + t(2\theta^TX^TX - 2y^TX)v + t^2v^TX^TXv.
   \end{array}$$
   \item This gives
-    $$f'(x;v)=\lim_{t\to0}\frac{f(x+tv)-f(x)}{t}
-    = (2x^TA^TA - 2y^TA)v = \nabla f(x)^Tv$$
-  \item Thus $\nabla f(x) = 2(A^TAx-A^Ty) = 2A^T(Ax-y)$.
-  \item Data science interpretation of $\nabla f(x)$?
+    $$J'(\theta;v)=\lim_{t\to0}\frac{J(\theta+tv)-J(\theta)}{t}
+    = (2\theta^TX^TX - 2y^TX)v = \nabla J(\theta)^Tv$$
+  \item Thus $\nabla J(\theta) = 2(X^TX\theta-X^Ty) = 2X^T(X\theta-y)$.
+  \item Data science interpretation of $\nabla J(\theta)$ (assuming
+    columns of $X$ are centered)?
   \end{itemize}
 \end{frame}
 \begin{frame}
-  \frametitle{Critical Points of $f(x)=\|Ax-y\|_2^2$}
+  \frametitle{Critical Points of $J(\theta)=\|X\theta-y\|_2^2$}
   \begin{itemize}
-  \item Need $\nabla f(x) = 2A^TAx-2A^Ty=0$.
-  \item Since $A$ is assumed to have full column rank, we see that
-    $A^TA$ is invertible.
-  \item Thus we have $x=(A^TA)^{-1}A^Ty$.
+  \item Need $\nabla J(\theta) = 2X^TX\theta-2X^Ty=0$.
+  \item Since $X$ is assumed to have full column rank, we see that
+    $X^TX$ is invertible.
+  \item Thus we have $\theta=(X^TX)^{-1}X^Ty$.
   \item As we will see later, this function is strictly convex (Hessian
-    $\nabla^2f(x) = 2A^TA$ is positive definite).
+    $\nabla^2J(\theta) = 2X^TX$ is positive definite).
   \item Thus we have found the unique minimizer (least squares solution).
   \end{itemize}
 \end{frame}
@@ -275,7 +403,7 @@
   \item Can use the following theorem to be completely rigorous.
   \end{itemize}
   \begin{theorem}
-    Let $f:\RR^n\to\RR$ and suppose $\partial_{x_i}f:\RR^n\to\RR$ is
+    Let $f:\RR^n\to\RR$ and suppose $\partial_if:\RR^n\to\RR$ is
     continuous for $i=1,\ldots,n$. Then $f$ is differentiable.
   \end{theorem}
 \end{frame}
